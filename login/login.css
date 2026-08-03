@@ -104,12 +104,6 @@ body {
     color: #fff;
 }
 
-#authForm {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-}
-
 .input {
     width: 100%;
     padding: 1rem;
@@ -164,29 +158,6 @@ body {
 #continueBtn {
     flex: 1;
 }
-
-#deleteBtn {
-    width: 56px;
-    border: 2px solid var(--danger);
-    border-radius: var(--radius-md);
-    background: var(--surface-alt);
-    color: red;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-#deleteBtn:hover {
-    opacity: .9;
-}
-
-#deleteBtn:active {
-    transform: scale(.96);
-}
-
-#deleteBtn i {
-    font-size: 1.1rem;
-}
-
 @media (max-width:480px) {
     .container {
         padding: var(--space-lg);

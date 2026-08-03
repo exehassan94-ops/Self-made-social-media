@@ -2,44 +2,52 @@ const heading = document.querySelector(".heading");
 
 const loginBtn = document.getElementById("loginBtn");
 const signupBtn = document.getElementById("signupBtn");
-const deleteBtn = document.getElementById("deleteBtn");
+const continueBtn = document.getElementById("continueBtn");
 
 const nameInput = document.getElementById("name");
 const numInput = document.getElementById("numInput");
-const password = document.getElementById("password")
+const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
 
 let currentMode = "login";
 
 let users = JSON.parse(localStorage.getItem("savedUser")) || [];
-console.log(users);
 
 function switchMode(mode) {
-    
+
     currentMode = mode;
-    
+
     if (mode === "login") {
-        
+
         heading.textContent = "Login";
-        deleteBtn.classList.add("hidden");
+
         loginBtn.classList.add("active");
         signupBtn.classList.remove("active");
-        
+
         nameInput.classList.add("hidden");
         confirmPassword.classList.add("hidden");
-        
+
     } else {
-        
+
         heading.textContent = "Sign Up";
-        deleteBtn.classList.remove("hidden");
+
         signupBtn.classList.add("active");
         loginBtn.classList.remove("active");
-        
+
         nameInput.classList.remove("hidden");
         confirmPassword.classList.remove("hidden");
-        
+
     }
-    
+
+}
+
+function inputCleaner() {
+
+    nameInput.value = "";
+    numInput.value = "";
+    password.value = "";
+    confirmPassword.value = "";
+
 }
 
 loginBtn.addEventListener("click", () => {
@@ -50,84 +58,85 @@ signupBtn.addEventListener("click", () => {
     switchMode("signup");
 });
 
-
 continueBtn.addEventListener("click", () => {
-    
+
     if (currentMode === "login") {
-        
-        if (!password.value || !numInput.value) {
+
+        if (!numInput.value || !password.value) {
             alert("Please enter the details");
             return;
         }
-        
+
         const findUser = users.find(user => user.number === numInput.value);
-        
+
         if (!findUser) {
-            alert("User not found, please register");
+            alert("User not found, please register.");
             return;
         }
-        if(findUser.password !== password.value){
-            alert("incorrect password or number");
+
+        if (findUser.password !== password.value) {
+            alert("Incorrect password.");
             return;
         }
-        
+
         alert("Login succeeded 200!");
-        numInput.value = "";
-        password.value = "";
-        
+        inputCleaner();
+
     } else {
-        
-        if (!numInput.value || !password.value || !confirmPassword.value || !nameInput.value) {
-            alert("please fill the details");
+
+        if (
+            !nameInput.value ||
+            !numInput.value ||
+            !password.value ||
+            !confirmPassword.value
+        ) {
+            alert("Please fill the details.");
             return;
         }
-        
-        
-        let userNumber = numInput.value;
-        let userPassword = password.value;
-        let userConfirmedPassword = confirmPassword.value;
-        let userName = nameInput.value;
-        const checkExistingUser = users.find(user => user.number === userNumber);
-        
+
+        const userName = nameInput.value;
+        const userNumber = numInput.value;
+        const userPassword = password.value;
+        const userConfirmedPassword = confirmPassword.value;
+
+        const checkExistingUser = users.find(
+            user => user.number === userNumber
+        );
+
         if (checkExistingUser) {
-            alert("number already registered!");
+            alert("Number already registered!");
             return;
         }
-        
-        
+
         if (userConfirmedPassword !== userPassword) {
-            alert("Password doesnt match!");
+            alert("Passwords don't match!");
             return;
         }
-        alert("Sign up successfull 201");
-        
-        let user = {
+
+        const user = {
             id: Date.now(),
             name: userName,
-            password: userPassword,
             number: userNumber,
+            password: userPassword
         };
-        
+
         users.push(user);
-        
-        localStorage.setItem("savedUser", JSON.stringify(users));
-        
+
+        localStorage.setItem(
+            "savedUser",
+            JSON.stringify(users)
+        );
+
         console.log(users);
-        numInput.value = "";
-        password.value = "";
-        confirmPassword.value = "";
-        nameInput.value = "";
+
+        alert("Sign Up Successful 201!");
+
+        inputCleaner();
+
+        switchMode("login");
+
     }
-    
+
 });
 
-deleteBtn.addEventListener("click", () => {
-    localStorage.removeItem("savedUser");
-    users = [];
-    numInput.value = "";
-    password.value = "";
-    confirmPassword.value = "";
-    nameInput.value = "";
-    console.log(users);
-})
 switchMode("login");
