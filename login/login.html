@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 class="heading"></h1>
+
+<div class="tabContainer">
+<button id="loginBtn" class="tab active">
+Login
+</button>
+
+<button id="signupBtn" class="tab">
+Sign Up
+</button>
+</div>
+
+<input type="text" id="name" class="input hidden" placeholder="Enter your name">
+
+<input type="number" id="numInput" class="input" placeholder="Enter your number">
+
+<input type="password" id="password" class="input" placeholder="Enter password">
+
+<input type="password" id="confirmPassword" class="input hidden" placeholder="Confirm password">
+
+<div class="buttonContainer">
+
+<button type="submit" id="continueBtn">
+Continue
+</button>
+
+<button id="deleteBtn" class="hidden">
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</div>
+</div>
+
+<script src="login.js"></script>
+
+</body>
+
+</html>
